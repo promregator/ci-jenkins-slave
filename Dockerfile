@@ -12,7 +12,7 @@ ENV JENKINS_HOME /var/jenkins_home
 COPY credentials/jenkins.creds /tmp/jenkins.creds
 
 RUN groupadd -g ${gid} ${group} \
-    && RUN useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user} \
+    && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user} \
 	&& cat /tmp/jenkins.creds | chpasswd \
 	&& rm -f /tmp/jenkins.creds
 
