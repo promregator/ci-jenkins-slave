@@ -5,12 +5,16 @@ ARG group=jenkins
 ARG uid=1000
 ARG gid=1000
 
+USER root
 
 ENV JENKINS_HOME /var/jenkins_home
 
-RUN groupadd -g ${gid} ${group}
-RUN useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
-RUN cat credentials/jenkins.creds | chpasswd
+COPY credentials/jenkins.creds /tmp/jenkins.creds
+
+RUN groupadd -g ${gid} ${group} \
+    && RUN useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user} \
+	&& cat /tmp/jenkins.creds | chpasswd \
+	&& rm -f /tmp/jenkins.creds
 
 RUN apt-get update && apt-get -y install -y \
     apt-transport-https \
