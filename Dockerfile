@@ -33,6 +33,8 @@ RUN apt-get update && apt-get -y install -y \
     && apt-get -q clean -y \
     && rm -rf /var/lib/apt/lists/*
 
+# see also https://github.com/ansible/ansible-container/issues/141
+RUN mkdir -p /var/run/sshd
 
 USER root
 
