@@ -8,9 +8,9 @@ ARG gid=1000
 
 ENV JENKINS_HOME /var/jenkins_home
 
-RUN groupadd -g ${gid} ${group} \
-    && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user} \
-    && echo "${user}:${password}" | chpasswd
+RUN groupadd -g ${gid} ${group}
+RUN useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
+RUN echo "${user}:${password}" | chpasswd
 
 RUN apt-get update && apt-get -y install -y \
     apt-transport-https \
