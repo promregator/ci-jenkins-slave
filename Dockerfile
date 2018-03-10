@@ -16,6 +16,7 @@ RUN groupadd -g ${gid} ${group} \
 	&& cat /tmp/jenkins.creds | chpasswd \
 	&& rm -f /tmp/jenkins.creds
 
+
 RUN apt-get update && apt-get -y install -y \
     apt-transport-https \
     wget \
@@ -23,16 +24,27 @@ RUN apt-get update && apt-get -y install -y \
     jq \
     git \
     vim \
-    less \
+    less 
+    ca-certificates \
+    software-properties-common \
     && apt-get -q autoremove \
     && apt-get -q clean -y \
     && rm -rf /var/lib/apt/lists/*
+
+
+# for installation of docker client, please also see
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
+	add-apt-repository \
+	   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+	   $(lsb_release -cs) \
+	   stable"
+
 
 RUN apt-get update && apt-get -y install -y \
     maven \
     openjdk-8-jdk \
     openssh-server \
-    ca-certificates \
+    docker-ce \
     && apt-get -q autoremove \
     && apt-get -q clean -y \
     && rm -rf /var/lib/apt/lists/*
