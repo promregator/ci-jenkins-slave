@@ -33,7 +33,7 @@ RUN apt-get update && apt-get -y install -y \
 
 
 # for installation of docker client, please also see
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
 	add-apt-repository \
 	   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
 	   $(lsb_release -cs) \
