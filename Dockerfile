@@ -24,7 +24,7 @@ RUN apt-get update && apt-get -y install -y \
     jq \
     git \
     vim \
-    less 
+    less \
     ca-certificates \
     software-properties-common \
     && apt-get -q autoremove \
