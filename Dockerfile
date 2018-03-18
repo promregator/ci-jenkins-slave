@@ -16,10 +16,6 @@ RUN groupadd -g ${gid} ${group} \
 	&& cat /tmp/jenkins.creds | chpasswd \
 	&& rm -f /tmp/jenkins.creds
 
-# Prepare install of CF CLI
-RUN wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | apt-key add - && \
-	echo "deb https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/sources.list.d/cloudfoundry-cli.list
-
 RUN apt-get update && apt-get -y install -y \
     apt-transport-https \
     wget \
@@ -30,12 +26,15 @@ RUN apt-get update && apt-get -y install -y \
     less \
     ca-certificates \
     software-properties-common \
-    golang-1.9-go \
-    cf-cli \
     && apt-get -q autoremove \
     && apt-get -q clean -y \
     && rm -rf /var/lib/apt/lists/*
 
+
+# Preparation of install of CF CLI
+# Warning! wget required (thus needs to be in a own block)
+RUN wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | apt-key add - && \
+	echo "deb https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/sources.list.d/cloudfoundry-cli.list
 
 # for installation of docker client, please also see
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
@@ -45,11 +44,14 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
 	   stable"
 
 
+# NB: Golang required for github cli
 RUN apt-get update && apt-get -y install -y \
     maven \
+    golang-1.9-go \
     openjdk-8-jdk \
     openssh-server \
     docker-ce \
+    cf-cli \
     && apt-get -q autoremove \
     && apt-get -q clean -y \
     && rm -rf /var/lib/apt/lists/*
