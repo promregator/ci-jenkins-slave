@@ -52,6 +52,16 @@ RUN apt-get update && apt-get -y install -y \
 # see also https://github.com/ansible/ansible-container/issues/141
 RUN mkdir -p /var/run/sshd
 
+# Install github cli
+# see also https://hub.github.com/
+COPY data/hub.profile.sh /etc/profile.d/
+
+RUN mkdir /tmp/hub && cd /tmp/hub && \
+	git clone https://github.com/github/hub.git . && \
+	chmod +x script/build && \
+	script/build -o /opt/hub && \
+	chmod +x /etc/profile.d/hub.profile.sh
+
 USER root
 
 EXPOSE 22
