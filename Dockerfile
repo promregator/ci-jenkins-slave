@@ -70,7 +70,7 @@ RUN mkdir /tmp/hub && cd /tmp/hub && \
 	script/build -o /opt/github/hub && \
 	rm -rf /tmp/hub
 
-ENV PATH "$PATH:/opt/hub"
+ENV PATH "$PATH:/opt/github"
 
 USER root
 
