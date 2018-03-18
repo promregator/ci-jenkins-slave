@@ -71,7 +71,8 @@ RUN mkdir /tmp/hub && cd /tmp/hub && \
 	git clone https://github.com/github/hub.git . && \
 	chmod +x script/build && \
 	script/build -o /opt/github/hub && \
-	chmod +x /etc/profile.d/hub.profile.sh
+	chmod +x /etc/profile.d/hub.profile.sh && \
+	rm -rf /tmp/hub
 
 USER root
 
