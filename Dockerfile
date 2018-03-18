@@ -16,6 +16,9 @@ RUN groupadd -g ${gid} ${group} \
 	&& cat /tmp/jenkins.creds | chpasswd \
 	&& rm -f /tmp/jenkins.creds
 
+# Prepare install of CF CLI
+RUN wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | apt-key add - && \
+	echo "deb https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/sources.list.d/cloudfoundry-cli.list
 
 RUN apt-get update && apt-get -y install -y \
     apt-transport-https \
@@ -27,7 +30,8 @@ RUN apt-get update && apt-get -y install -y \
     less \
     ca-certificates \
     software-properties-common \
-    go \
+    golang \
+    cf-cli \
     && apt-get -q autoremove \
     && apt-get -q clean -y \
     && rm -rf /var/lib/apt/lists/*
