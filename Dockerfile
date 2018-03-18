@@ -67,7 +67,7 @@ RUN chmod +x /etc/profile.d/golang.profile.sh
 # see also https://hub.github.com/
 COPY data/hub.profile.sh /etc/profile.d/
 RUN mkdir /tmp/hub && cd /tmp/hub && \
-	. etc/profile.d/golang.profile.sh && \
+	. /etc/profile.d/golang.profile.sh && \
 	git clone https://github.com/github/hub.git . && \
 	chmod +x script/build && \
 	script/build -o /opt/github/hub && \
