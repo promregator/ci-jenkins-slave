@@ -60,19 +60,17 @@ RUN apt-get update && apt-get -y install -y \
 RUN mkdir -p /var/run/sshd
 
 # Install go 1.9, which is required to install github cli
-COPY data/golang.profile.sh /etc/profile.d/
-RUN chmod +x /etc/profile.d/golang.profile.sh
+ENV PATH "$PATH:/usr/lib/go-1.9/bin"
 
 # Install github cli
 # see also https://hub.github.com/
-COPY data/hub.profile.sh /etc/profile.d/
 RUN mkdir /tmp/hub && cd /tmp/hub && \
-	. /etc/profile.d/golang.profile.sh && \
 	git clone https://github.com/github/hub.git . && \
 	chmod +x script/build && \
 	script/build -o /opt/github/hub && \
-	chmod +x /etc/profile.d/hub.profile.sh && \
 	rm -rf /tmp/hub
+
+ENV PATH "$PATH:/opt/hub"
 
 USER root
 
