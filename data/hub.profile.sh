@@ -1,3 +1,3 @@
 #!/bin/bash
 
-export PATH=$PATH:/opt/hub
+export PATH=$PATH:/opt/github

@@ -67,7 +67,7 @@ COPY data/hub.profile.sh /etc/profile.d/
 RUN mkdir /tmp/hub && cd /tmp/hub && \
 	git clone https://github.com/github/hub.git . && \
 	chmod +x script/build && \
-	script/build -o /opt/hub && \
+	script/build -o /opt/github/hub && \
 	chmod +x /etc/profile.d/hub.profile.sh
 
 USER root
