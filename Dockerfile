@@ -27,6 +27,7 @@ RUN apt-get update && apt-get -y install -y \
     less \
     ca-certificates \
     software-properties-common \
+    go \
     && apt-get -q autoremove \
     && apt-get -q clean -y \
     && rm -rf /var/lib/apt/lists/*
