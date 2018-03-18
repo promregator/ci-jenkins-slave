@@ -30,7 +30,7 @@ RUN apt-get update && apt-get -y install -y \
     less \
     ca-certificates \
     software-properties-common \
-    golang \
+    golang-1.9-go \
     cf-cli \
     && apt-get -q autoremove \
     && apt-get -q clean -y \
@@ -57,10 +57,13 @@ RUN apt-get update && apt-get -y install -y \
 # see also https://github.com/ansible/ansible-container/issues/141
 RUN mkdir -p /var/run/sshd
 
+# Install go 1.9, which is required to install github cli
+COPY data/golang.profile.sh /etc/profile.d/
+RUN chmod +x /etc/profile.d/golang.profile.sh
+
 # Install github cli
 # see also https://hub.github.com/
 COPY data/hub.profile.sh /etc/profile.d/
-
 RUN mkdir /tmp/hub && cd /tmp/hub && \
 	git clone https://github.com/github/hub.git . && \
 	chmod +x script/build && \
