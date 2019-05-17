@@ -70,6 +70,10 @@ RUN mkdir /tmp/hub && cd /tmp/hub && \
 	script/build -o /opt/github/hub && \
 	rm -rf /tmp/hub
 
+# Necessary (fake) environment options to permit tests for Docker Image script (see also a0dd11362fc286305d95e9ba3d35a59f15d76624 in promregator/promregator)
+RUN mkdir -p /home/promregator /run/secrets && \
+        chown ${user}:${group} /home/promregator /run/secrets
+
 ENV PATH "$PATH:/opt/github"
 
 USER root
