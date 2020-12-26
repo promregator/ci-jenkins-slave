@@ -9,6 +9,11 @@ USER root
 
 ENV JENKINS_HOME /var/jenkins_home
 
+# TZdata needs to be configured to run apt-get properly
+# see also https://rtfm.co.ua/en/docker-configure-tzdata-and-timezone-during-build/
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 COPY credentials/jenkins.creds /tmp/jenkins.creds
 
 RUN groupadd -g ${gid} ${group} \
