@@ -81,7 +81,7 @@ RUN mkdir -p /home/promregator /run/secrets && \
 
 ENV PATH "$PATH:/opt/github"
 
-ENV JAVA_HOME "/usr/lib/jvm/java-14-openjdk-amd64/bin"
+ENV JAVA_HOME "/usr/lib/jvm/java-14-openjdk-amd64"
 
 USER root
 
