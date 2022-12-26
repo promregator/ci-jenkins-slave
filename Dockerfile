@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ARG user=jenkins
 ARG group=jenkins
@@ -53,7 +53,7 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
 RUN apt-get update && apt-get -y install -y \
     maven \
     golang-1.14-go \
-    openjdk-14-jdk \
+    openjdk-17-jdk \
     openssh-server \
     docker-ce \
     cf-cli \
