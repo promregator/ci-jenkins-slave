@@ -64,8 +64,9 @@ RUN apt-get update && apt-get -y install -y \
 # see also https://github.com/ansible/ansible-container/issues/141
 RUN mkdir -p /var/run/sshd
 
-# Fix missing host keys
-RUN /usr/bin/ssh-keygen -A
+# Fix missing host keys (which need to be "jenkins"-readable
+RUN /usr/bin/ssh-keygen -A && \
+    chown ${user}:${group} /etc/ssh/ssh_host_*_key
 
 # Install go 1.18, which is required to install github cli
 ENV PATH "$PATH:/usr/lib/go-1.18/bin"
