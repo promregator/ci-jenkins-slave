@@ -52,7 +52,7 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
 # NB: Golang required for github cli
 RUN apt-get update && apt-get -y install -y \
     maven \
-    golang-1.14-go \
+    golang-1.18-go \
     openjdk-17-jdk \
     openssh-server \
     docker-ce \
@@ -64,8 +64,8 @@ RUN apt-get update && apt-get -y install -y \
 # see also https://github.com/ansible/ansible-container/issues/141
 RUN mkdir -p /var/run/sshd
 
-# Install go 1.14, which is required to install github cli
-ENV PATH "$PATH:/usr/lib/go-1.14/bin"
+# Install go 1.18, which is required to install github cli
+ENV PATH "$PATH:/usr/lib/go-1.18/bin"
 
 # Install github cli
 # see also https://hub.github.com/
