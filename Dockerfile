@@ -18,6 +18,7 @@ COPY credentials/jenkins.creds /tmp/jenkins.creds
 
 RUN groupadd -g ${gid} ${group} \
     && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user} \
+    && chown g+w
 	&& cat /tmp/jenkins.creds | chpasswd \
 	&& rm -f /tmp/jenkins.creds
 
@@ -63,6 +64,9 @@ RUN apt-get update && apt-get -y install -y \
 
 # see also https://github.com/ansible/ansible-container/issues/141
 RUN mkdir -p /var/run/sshd
+
+# Fix missing host keys
+RUN /usr/bin/ssh-keygen -A
 
 # Install go 1.18, which is required to install github cli
 ENV PATH "$PATH:/usr/lib/go-1.18/bin"
