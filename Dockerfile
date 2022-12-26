@@ -18,7 +18,6 @@ COPY credentials/jenkins.creds /tmp/jenkins.creds
 
 RUN groupadd -g ${gid} ${group} \
     && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user} \
-    && chown g+w
 	&& cat /tmp/jenkins.creds | chpasswd \
 	&& rm -f /tmp/jenkins.creds
 
