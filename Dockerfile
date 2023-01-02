@@ -87,6 +87,9 @@ ENV PATH "$PATH:/opt/github"
 
 ENV JAVA_HOME "/usr/lib/jvm/java-17-openjdk-amd64"
 
+# Perform base-update of dependency-check-maven to prevent long update cycles
+RUN mvn dependency-check-maven:7.4.1:update-only
+
 USER root
 
 EXPOSE 22
