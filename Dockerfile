@@ -56,7 +56,7 @@ RUN apt-get update && apt-get -y install -y \
     openjdk-17-jdk \
     openssh-server \
     docker-ce \
-    cf-cli \
+    cf8-cli \
     && apt-get -q autoremove \
     && apt-get -q clean -y \
     && rm -rf /var/lib/apt/lists/*
