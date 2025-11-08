@@ -4,6 +4,7 @@ ARG user=jenkins
 ARG group=jenkins
 ARG uid=2000
 ARG gid=2000
+ARG golangversion=1.22
 
 USER root
 
@@ -52,7 +53,7 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
 # NB: Golang required for github cli
 RUN apt-get update && apt-get -y install -y \
     maven \
-    golang-1.22-go \
+    golang-${golangversion}-go \
     openjdk-17-jdk \
     openssh-server \
     docker-ce \
@@ -68,8 +69,8 @@ RUN mkdir -p /var/run/sshd
 RUN /usr/bin/ssh-keygen -A && \
     chown ${user}:${group} /etc/ssh/ssh_host_*_key
 
-# Install go 1.18, which is required to install github cli
-ENV PATH "$PATH:/usr/lib/go-1.18/bin"
+# Install golang, which is required to install github cli
+ENV PATH "$PATH:/usr/lib/go-${golangversion}/bin"
 
 # Install github cli
 # see also https://hub.github.com/
