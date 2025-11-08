@@ -52,7 +52,7 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
 # NB: Golang required for github cli
 RUN apt-get update && apt-get -y install -y \
     maven \
-    golang-1.18-go \
+    golang-1.22-go \
     openjdk-17-jdk \
     openssh-server \
     docker-ce \
