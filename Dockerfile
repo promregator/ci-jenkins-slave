@@ -2,8 +2,8 @@ FROM ubuntu:24.04
 
 ARG user=jenkins
 ARG group=jenkins
-ARG uid=1000
-ARG gid=1000
+ARG uid=2000
+ARG gid=2000
 
 USER root
 
