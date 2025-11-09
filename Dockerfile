@@ -58,6 +58,7 @@ RUN apt-get update && apt-get -y install -y \
     openssh-server \
     docker-ce \
     cf8-cli \
+    && apt-get -y remove openjdk-21-jre-headless \
     && apt-get -q autoremove \
     && apt-get -q clean -y \
     && rm -rf /var/lib/apt/lists/*
